@@ -9,17 +9,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'admin', 'middleware' =>  ['auth', 'admin']], function () {
+Route::group(['middleware' => ['PreventBackHistory']], function () {
+
+    Auth::routes();
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'PreventBackHistory', 'admin']], function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('setting', [AdminController::class, 'setting'])->name('admin.setting');
 });
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'PreventBackHistory', 'user']], function () {
     Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('setting', [UserController::class, 'setting'])->name('user.setting');
