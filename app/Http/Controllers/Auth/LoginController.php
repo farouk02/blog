@@ -22,19 +22,20 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected function redirectTo()
-    {
-        if (Auth()->user()->role === 0) {
-            return route('admin.dashboard');
-        } elseif (Auth()->user()->role === 1) {
-            return route('user.dashboard');
-        }
-    }
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function redirectTo()
+    {
+        if (Auth()->user()->role === 0) {
+            return redirect(RouteServiceProvider::USER);
+        } elseif (Auth()->user()->role === 1) {
+            return redirect(RouteServiceProvider::ADMIN);
+        }
+    }
+
 
     public function login(Request $request)
     {
@@ -51,7 +52,7 @@ class LoginController extends Controller
                 return redirect()->route('user.dashboard');
             }
         } else {
-            return redirect()->route('login')->with('error', 'Email Or Password are wrong');
+            return redirect()->route('login')->with('error', __('Email Or Password are wrong'));
         }
     }
 }
