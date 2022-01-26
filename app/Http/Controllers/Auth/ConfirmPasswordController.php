@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
 class ConfirmPasswordController extends Controller
@@ -20,7 +20,6 @@ class ConfirmPasswordController extends Controller
     */
 
     use ConfirmsPasswords;
-
     /**
      * Where to redirect users when the intended url fails.
      *
@@ -29,9 +28,9 @@ class ConfirmPasswordController extends Controller
     protected function redirectTo()
     {
         if (Auth()->user()->role === 0) {
-            return route('admin.dashboard');
+            return route('admin.dashboard', App::currentLocale());
         } elseif (Auth()->user()->role === 1) {
-            return route('user.dashboard');
+            return route('user.dashboard', App::currentLocale());
         }
     }
 

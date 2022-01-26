@@ -42,17 +42,44 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <img src="/img/flags/{{ App::currentLocale() }}.png" width="20px"
+                                    alt="{{ __(App::currentLocale()) }}"> {{ __(App::currentLocale()) }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route(Route::currentRouteName(), 'en') }}"
+                                    onclick="">
+                                    <img src="/img/flags/en.png" width="20px" alt="{{ __('en') }}">
+                                    {{ __('en') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route(Route::currentRouteName(), 'ar') }}"
+                                    onclick="">
+                                    <img src="/img/flags/ar.png" width="20px" alt="{{ __('ar') }}">
+                                    {{ __('ar') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route(Route::currentRouteName(), 'fr') }}"
+                                    onclick="">
+                                    <img src="/img/flags/fr.png" width="20px" alt="{{ __('fr') }}">
+                                    {{ __('fr') }}
+                                </a>
+                            </div>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link"
+                                        href="{{ route('login', App::currentLocale()) }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link"
+                                        href="{{ route('register', App::currentLocale()) }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -63,13 +90,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout', App::currentLocale()) }}"
+                                        onclick="event.preventDefault();
+                                                                                                                                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <form id="logout-form" action="{{ route('logout', App::currentLocale()) }}"
+                                        method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
