@@ -8,10 +8,6 @@ use App\Http\Controllers\User\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 
 Route::middleware(['PreventBackHistory'])->group(function () {
