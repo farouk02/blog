@@ -41,11 +41,11 @@ class LoginController extends Controller
     {
         $input = $request->all();
         $this->validate($request, [
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string'],
             'password' => ['required', 'string'],
         ]);
 
-        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+        if (auth()->attempt(array('username' => $input['email'], 'password' => $input['password']))) {
             if (Auth()->user()->role === 0) {
                 return redirect()->route('admin.dashboard');
             } elseif (Auth()->user()->role === 1) {
