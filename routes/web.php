@@ -17,6 +17,7 @@ Route::middleware(['PreventBackHistory'])->group(function () {
     Route::middleware(['auth'])->group(function () {
 
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('/expire', [App\Http\Controllers\HomeController::class, 'expire'])->name('expire');
 
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
             Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');

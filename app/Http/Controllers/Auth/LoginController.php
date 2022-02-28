@@ -48,10 +48,6 @@ class LoginController extends Controller
         ]);
 
         if (auth()->attempt(array('username' => $input['email'], 'password' => $input['password']))) {
-            $user = User::find(Auth::id());
-            $user->expired = 0;
-            $user->save();
-
             if (Auth()->user()->role === 0) {
                 return redirect()->route('admin.dashboard');
             } elseif (Auth()->user()->role === 1) {

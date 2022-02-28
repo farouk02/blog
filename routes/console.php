@@ -10,4 +10,4 @@ Artisan::command('user:expire', function () {
         $user->expired = 1;
         $user->save();
     }
-})->purpose('Your login Expired. Please reSign in!');
+});
