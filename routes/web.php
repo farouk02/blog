@@ -9,8 +9,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/send-email', [App\Http\Controllers\SendEmailController::class, 'index'])->name('send');
 Route::middleware(['PreventBackHistory'])->group(function () {
+
 
     Auth::routes();
 

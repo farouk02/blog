@@ -16,9 +16,11 @@ class noitify extends Mailable
      *
      * @return void
      */
+
+    public $data;
+
     public function __construct()
     {
-        //
     }
 
     /**
@@ -28,6 +30,6 @@ class noitify extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('emails.testEmail');
     }
 }
