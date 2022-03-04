@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
+
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -31,11 +34,11 @@ class LoginController extends Controller
     {
         $input = $request->all();
         $this->validate($request, [
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string'],
             'password' => ['required', 'string'],
         ]);
 
-        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+        if (auth()->attempt(array('username' => $input['email'], 'password' => $input['password']))) {
             if (Auth()->user()->role === 0) {
                 return redirect()->route('admin.dashboard', App::currentLocale());
             } elseif (Auth()->user()->role === 1) {

@@ -8,17 +8,18 @@ use Illuminate\Support\Facades\App;
 
 Route::redirect('/', '/en');
 
-Route::prefix('{locale}')->group(function () {
+
+Route::get('/send-email', [App\Http\Controllers\SendEmailController::class, 'index'])->name('send');
+Route::middleware(['PreventBackHistory'])->group(function () {
 
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
-
-    Route::middleware(['PreventBackHistory'])->group(function () {
+    Auth::routes();
 
 
-        Auth::routes();
+
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('/expire', [App\Http\Controllers\HomeController::class, 'expire'])->name('expire');
+
 
         Route::middleware(['auth'])->group(function () {
 

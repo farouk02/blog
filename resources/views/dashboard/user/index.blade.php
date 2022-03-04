@@ -7,15 +7,19 @@
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
 
-                        {{ __('You are logged in!') }} {{ __('User') }}
-                    </div>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+@if (Auth::user()->expired)
+You are Expired. Please login again!
+<a href="{{route('expire')}}">unExpired</a>
+@endif
+                    {{ __('You are logged in!') }} User
+
                 </div>
             </div>
         </div>
