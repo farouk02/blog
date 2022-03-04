@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -29,9 +29,9 @@ class ResetPasswordController extends Controller
     protected function redirectTo()
     {
         if (Auth()->user()->role === 0) {
-            return route('admin.dashboard');
+            return route('user.dashboard', App::currentLocale());
         } elseif (Auth()->user()->role === 1) {
-            return route('user.dashboard');
+            return route('admin.dashboard', App::currentLocale());
         }
     }
 }

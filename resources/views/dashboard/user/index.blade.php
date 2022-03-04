@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Dashboard') }}</div>
+
 
                 <div class="card-body">
                     @if (session('status'))
@@ -18,9 +19,9 @@ You are Expired. Please login again!
 <a href="{{route('expire')}}">unExpired</a>
 @endif
                     {{ __('You are logged in!') }} User
+
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

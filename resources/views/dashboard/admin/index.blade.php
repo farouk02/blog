@@ -13,11 +13,13 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+
 @if (Auth::user()->expired)
 You are Expired. Please login again!
 <a href="{{route('expire')}}">unExpired</a>
 @endif
                         {{ __('You are logged in!') }} Admin
+
                     </div>
                 </div>
             </div>
